@@ -17,6 +17,7 @@ public class Main {
         Item d = new Item("Flax seeds [400g]", 1.99);
         Item e = new Item("Whole frozen lobster [350g]", 12.99);
 
+        /*
         myBasket.setItems(a, -2);
         myBasket.setItems(c, 1);
         myBasket.setItems(e, 0);
@@ -32,6 +33,6 @@ public class Main {
         //Testing on empty basket
         myBasket.deleteItems(a,3);
         myBasket.displayBasket();
-
+        */
     }
 }

@@ -10,12 +10,6 @@ class BasketTest {
     Basket testBasket = new Basket();
     Item testItem = new Item("random", 0.01);
 
-    @Before
-    public void cleanBasket() {
-        testBasket = new Basket();
-        testItem = new Item("random", 0.01);
-    }
-
     @Test
     void setItems_shouldThrowIAEexception1() {
         try {
@@ -39,23 +33,50 @@ class BasketTest {
 
     @Test
     void setItems_validationOfAddingAmountFunction() {
-
         testBasket.setItems(testItem, 3);
-        testBasket.displayBasket();
         testBasket.setItems(testItem, 5);
-        testBasket.displayBasket();
-        // assertEquals(8, testBasket.getAmount(testItem));
+        assertEquals(8, testBasket.getAmount(testItem));
     }
 
     @Test
-    void deleteItems() {
+    void deleteItem_TryingToDeleteNotExistingItem() {
+        try {
+            testBasket.deleteItems(testItem, 5);
+            fail("");
+        } catch (NullPointerException e) {
+            System.out.println("Suceed.");
+        }
     }
 
     @Test
-    void displayBasket() {
+    void deleteItem_TryingToDeleteMoreInstancesOfItemThanYouHave() {
+        try {
+            testBasket.setItems(testItem, 3);
+            testBasket.deleteItems(testItem, 4);
+            fail("");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Suceed.");
+        }
+    }
+
+    @Test
+    void deleteItems_validationOfDeletingCertainAmount() {
+        testBasket.setItems(testItem, 11);
+        testBasket.deleteItems(testItem,9);
+        assertEquals(2, testBasket.getAmount(testItem));
+    }
+
+    @Test
+    void deleteItems_deletingEqualAmountToAmountInBasket() {
+        testBasket.setItems(testItem, 7);
+        testBasket.setItems(testItem, 2);
+        testBasket.deleteItems(testItem,9);
+        assertEquals(0, testBasket.getAmount(testItem));
     }
 
     @Test
     void sumUp() {
+        testBasket.setItems(testItem, 13);
+        assertEquals(0.13, testBasket.sumUp());
     }
 }

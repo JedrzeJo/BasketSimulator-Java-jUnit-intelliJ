@@ -1,10 +1,8 @@
 package com.jedrzej.org;
 
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Basket {
 
@@ -19,7 +17,7 @@ public class Basket {
         this.mapOfItems.clear();
     }
 
-    public int getAmount(Item local){
+    public int getAmount(Item local) {
         return this.mapOfItems.getOrDefault(local, 0);
     }
 
@@ -34,11 +32,10 @@ public class Basket {
         else if (this.mapOfItems.getOrDefault(keyAtribute, 0) > 0) {
             Integer localResult = this.mapOfItems.getOrDefault(keyAtribute, 0) + amount;
             this.mapOfItems.replace(keyAtribute, localResult);
-        } /*else {
+        } else {
             this.mapOfItems.put(keyAtribute, amount);
-            System.out.println(keyAtribute.getItemName() + " added to Your basket.");
-        }*/
-        ;
+            System.out.println(keyAtribute.getItemName() + " added to Your basket in amount of "+amount);
+        }
     }
 
     //MULTI DELETE METHOD
@@ -56,7 +53,7 @@ public class Basket {
             System.out.println("Product " + keyAtribute.getItemName() + " completely removed from Your basket");
         } else {
             int localResult = this.mapOfItems.getOrDefault(keyAtribute, 0) - amount;
-            this.setItems(keyAtribute, localResult);
+            this.mapOfItems.replace(keyAtribute, localResult);
             System.out.println(keyAtribute.getItemName() + " removed in amount of " + amount);
         }
 
@@ -78,8 +75,6 @@ public class Basket {
         } catch (Exception e) {
             System.out.println("Basket is empty.");
         }
-        ;
-
     }
 
     //COUNTING SUM OF YOUR ORDER
