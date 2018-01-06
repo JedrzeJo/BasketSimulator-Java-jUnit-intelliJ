@@ -19,6 +19,11 @@ public class Basket {
         this.mapOfItems.clear();
     }
 
+    public int getAmount(Item local){
+        return this.mapOfItems.getOrDefault(local, 0);
+    }
+
+
     //MULTI SETTER to basket METHOD
     public void setItems(Item keyAtribute, Integer amount) {
         if (amount <= 0) {
@@ -29,10 +34,10 @@ public class Basket {
         else if (this.mapOfItems.getOrDefault(keyAtribute, 0) > 0) {
             Integer localResult = this.mapOfItems.getOrDefault(keyAtribute, 0) + amount;
             this.mapOfItems.replace(keyAtribute, localResult);
-        } else {
+        } /*else {
             this.mapOfItems.put(keyAtribute, amount);
             System.out.println(keyAtribute.getItemName() + " added to Your basket.");
-        }
+        }*/
         ;
     }
 
@@ -44,7 +49,8 @@ public class Basket {
             throw new NullPointerException(String.format("Cannot delete not existing object."));
         } else if (this.mapOfItems.getOrDefault(keyAtribute, 0) < amount)  //Ensure that map always has a value
         {
-            System.out.println("You cannot remove more products than You have.");
+            //System.out.println("You cannot remove more products than You have.");
+            throw new IllegalArgumentException(String.format("Cannot remove %d products.", amount));
         } else if (this.mapOfItems.getOrDefault(keyAtribute, 0) == amount) {
             this.mapOfItems.remove(keyAtribute);
             System.out.println("Product " + keyAtribute.getItemName() + " completely removed from Your basket");
